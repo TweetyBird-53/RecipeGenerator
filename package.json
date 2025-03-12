@@ -1,5 +1,5 @@
 {
-  "name": "unit-ai-2-rag",
+  "name": "recipe-generator",
   "version": "1.0.0",
   "description": "",
   "main": "./client/App.jsx",

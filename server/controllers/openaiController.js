@@ -1,6 +1,5 @@
-const { RequestHandler } = require('express');
-const OpenAI = require('openai');
-require('dotenv/config');
+import OpenAI from 'openai';
+import 'dotenv/config';
 
 const openaiKey = process.env.OPENAI_API_KEY;
 
@@ -8,7 +7,7 @@ const openai = new OpenAI({
   apiKey: openaiKey,
 });
 
-const queryOpenAIEmbedding = async (_req, res, next) => {
+export const queryOpenAIEmbedding = async (_req, res, next) => {
   if (res.locals.embedding) return next();
   
   const { userQuery } = res.locals;
@@ -38,7 +37,7 @@ const queryOpenAIEmbedding = async (_req, res, next) => {
   }
 };
 
-const queryOpenAIChat = async (_req, res, next) => {
+export const queryOpenAIChat = async (_req, res, next) => {
   const { userQuery, pineconeQueryResult } = res.locals;
   if (!userQuery) {
     const error = {
@@ -100,9 +99,4 @@ const queryOpenAIChat = async (_req, res, next) => {
 
     return next(error);
   }
-};
-
-module.exports = {
-  queryOpenAIEmbedding,
-  queryOpenAIChat,
 };

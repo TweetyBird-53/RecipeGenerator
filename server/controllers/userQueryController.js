@@ -1,6 +1,7 @@
-const { RequestHandler } = require('express');
+// import { Request, RequestHandler } from 'express';
+// import { ServerError } from '../../types/types';
 
-const parseUserQuery = async (req, res, next) => {
+export const parseUserQuery = async (req, res, next) => {
   if (!req.body.userQuery) {
     const error = {
       log: 'User query not provided',
@@ -23,8 +24,4 @@ const parseUserQuery = async (req, res, next) => {
   console.log("userquery: ", userQuery);
   res.locals.userQuery = userQuery;
   return next();
-};
-
-module.exports = {
-  parseUserQuery,
 };

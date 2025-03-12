@@ -1,6 +1,5 @@
-const { RequestHandler } = require('express');
-const { Pinecone } = require('@pinecone-database/pinecone');
-require('dotenv/config');
+import { Pinecone } from '@pinecone-database/pinecone';
+import 'dotenv/config';
 
 const pineconeKey = process.env.PINECONE_API_KEY;
 
@@ -12,7 +11,7 @@ const pc = new Pinecone({
 
 const Index = pc.index('movies');
 
-const queryPineconeDatabase = async (_req, res, next) => {
+export const queryPineconeDatabase = async (_req, res, next) => {
   const { embedding } = res.locals;
 
   if (!embedding) {
@@ -43,8 +42,4 @@ const queryPineconeDatabase = async (_req, res, next) => {
       status: 500,
     });
   }
-};
-
-module.exports = {
-  queryPineconeDatabase,
 };

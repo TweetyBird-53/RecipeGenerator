@@ -1,9 +1,10 @@
-const path = require('path');
-const { fileURLToPath } = require('url');
-const fs = require('fs').promises;
-const OpenAI = require('openai');
-const { Pinecone } = require('@pinecone-database/pinecone');
-require('dotenv/config');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { promises as fs } from 'fs';
+import OpenAI from 'openai';
+import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
+import 'dotenv/config';
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pinecone = new Pinecone();

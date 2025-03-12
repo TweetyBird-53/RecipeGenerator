@@ -1,8 +1,8 @@
-import express, { ErrorRequestHandler } from 'express';
+import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 
-import { ServerError } from '../types/types.js';
+// import { ServerError } from '../types/types.js';
 import { parseUserQuery } from './controllers/userQueryController.js';
 import { queryPineconeDatabase } from './controllers/pineconeController.js';
 import { queryOpenAIEmbedding, queryOpenAIChat } from './controllers/openaiController.js';
