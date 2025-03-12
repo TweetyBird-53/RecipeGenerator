@@ -1,4 +1,3 @@
-
 export const parseUserQuery = async (req, res, next) => {
   if (!req.body.userQuery) {
     const error = {
@@ -19,7 +18,7 @@ export const parseUserQuery = async (req, res, next) => {
     };
     return next(error);
   }
-  console.log("userquery: ", userQuery);
+  console.log('userquery: ', userQuery);
   res.locals.userQuery = userQuery;
   return next();
 };

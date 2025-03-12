@@ -9,7 +9,7 @@ const pc = new Pinecone({
   // environment: process.env.PINECONE_HOST_URL,
 });
 
-const Index = pc.index('movies');
+const Index = pc.index('recipes');
 
 export const queryPineconeDatabase = async (_req, res, next) => {
   const { embedding } = res.locals;
