@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 const Recommendations = () => {
   const [userQuery, setUserQuery] = useState('');
-  const [startYear, setStartYear] = useState('');
-  const [endYear, setEndYear] = useState('');
   const [recommendation, setRecommendation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -39,32 +37,12 @@ const Recommendations = () => {
     <div style={{ padding: '20px' }}>
       <form onSubmit={handleSubmit}>
         <label>
-          I want to watch a movie about:
+          I have these ingredients in my fridge:
           <input
             type="text"
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
-            placeholder="Enter movie summary"
-            style={{ width: '100%', padding: '8px', marginTop: '8px' }}
-          />
-        </label>
-        <label>
-          Start year:
-          <input
-            type="number"
-            value={startYear}
-            onChange={(e) => setStartYear(e.target.value)}
-            placeholder="Enter start year"
-            style={{ width: '100%', padding: '8px', marginTop: '8px' }}
-          />
-        </label>
-        <label>
-          End year:
-          <input
-            type="number"
-            value={endYear}
-            onChange={(e) => setEndYear(e.target.value)}
-            placeholder="Enter end year"
+            placeholder="Enter names of ingredients separated by commas"
             style={{ width: '100%', padding: '8px', marginTop: '8px' }}
           />
         </label>

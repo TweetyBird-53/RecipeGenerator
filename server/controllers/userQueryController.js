@@ -1,5 +1,3 @@
-// import { Request, RequestHandler } from 'express';
-// import { ServerError } from '../../types/types';
 
 export const parseUserQuery = async (req, res, next) => {
   if (!req.body.userQuery) {
@@ -11,7 +9,7 @@ export const parseUserQuery = async (req, res, next) => {
     return next(error);
   }
 
-  const { userQuery, startYear, endYear } = req.body;
+  const { userQuery } = req.body;
 
   if (typeof userQuery !== 'string') {
     const error = {

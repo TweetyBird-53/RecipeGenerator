@@ -9,8 +9,8 @@
   /* Dark Mode Background */
   body {
     text-align: center;
-    background-color: #0a0e17;
-    color: #d3e7ff;
+    background-color: #f9ce7e;
+    color: #8c461b;
     line-height: 1.6;
     padding: 20px;
     min-height: 100vh;
@@ -52,8 +52,8 @@
   }
   
   button {
-    background-color: #1c2d50;
-    color: #d9edf7;
+    background-color: #f0a243;
+    color: #f7f7f7;
     border: none;
     padding: 12px 20px;
     font-size: 1rem;
@@ -125,7 +125,7 @@
   }
   
   td {
-    background-color: #111722;
+    background-color: #221b11;
   }
   
   /* Responsive Design */
