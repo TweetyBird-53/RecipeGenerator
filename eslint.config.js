@@ -6,6 +6,11 @@ import tseslint from 'typescript-eslint';
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    env: {
+      // ✅ Add Node.js environment support
+      node: true,
+      es2021: true,
+    },
     settings: {
       react: {
         version: 'detect',
@@ -37,6 +42,7 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
+      'no-console': 'off', // ✅ Allow console.log
     },
   },
   {

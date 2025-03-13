@@ -9,7 +9,7 @@ const openai = new OpenAI({
 
 export const queryOpenAIEmbedding = async (_req, res, next) => {
   if (res.locals.embedding) return next();
-  
+
   const { userQuery } = res.locals;
   console.log('userQuery: ', userQuery);
   if (!userQuery) {
@@ -56,18 +56,23 @@ export const queryOpenAIChat = async (_req, res, next) => {
     return next(error);
   }
 
-  const movieOptions = pineconeQueryResult.map((movie, i) => `'''Option ${i}: ${movie.metadata?.title}: ${movie.metadata?.plot}'''`).join(', ');
+  const recipeOptions = pineconeQueryResult
+    .map(
+      (recipe, i) =>
+        `'''Option ${i}: ${recipe.metadata?.title}: ${recipe.metadata?.plot}'''`
+    )
+    .join(', ');
 
-  const instructRole = `You are a helpful assistant that recommends movies to users based on their interests.`;
-  const instructGoal = `When given a user's query and a list of movies, recommend a single movie to the user and include a brief one-sentence description without spoilers.`;
+  const instructRole = `You are a helpful assistant that recommends a recipe to users based on their ingredients.`;
+  const instructGoal = `When given a user's query and a list of ingredients, recommend a single recipe to the user and include a brief description with simple but clear steps to execute the recipe.`;
   const instructFormat = `
   Your response should be in the format: 
-  "[Movie Title] - [One-sentence description]"`;
+  "[Recipe Name] - [Brief description with steps]"`;
   const systemMessage = instructRole + instructGoal + instructFormat;
   const userMessage = `
-  User request: """I want to watch a movie about: ${userQuery}"""
-  Movie options: """${movieOptions}`;
-  
+  User request: """I have these ingredients in my fridge: ${userQuery}"""
+  Recipe options: """${recipeOptions}`;
+
   try {
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -87,8 +92,10 @@ export const queryOpenAIChat = async (_req, res, next) => {
       };
       return next(error);
     }
-    res.locals.allMovieRecommentations = completion.choices.map((choice) => choice.message.content || '');
-    res.locals.movieRecommendation = content;
+    res.locals.allRecipeRecommentations = completion.choices.map(
+      (choice) => choice.message.content || ''
+    );
+    res.locals.recipeRecommendation = content;
     return next();
   } catch (err) {
     const error = {

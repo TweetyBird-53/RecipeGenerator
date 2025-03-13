@@ -39,18 +39,18 @@ const Recommendations = () => {
         <label>
           I have these ingredients in my fridge:
           <input
-            type="text"
+            type='text'
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
-            placeholder="Enter names of ingredients separated by commas"
+            placeholder='Enter names of ingredients separated by commas'
             style={{ width: '100%', padding: '8px', marginTop: '8px' }}
           />
         </label>
-        <button type="submit" style={{ marginTop: '16px' }} disabled={loading}>
+        <button type='submit' style={{ marginTop: '16px' }} disabled={loading}>
           {loading ? 'Loading...' : 'Get Recommendation'}
         </button>
       </form>
-      {error && <p className="error">{error}</p>}
+      {error && <p className='error'>{error}</p>}
       {recommendation && (
         <div style={{ marginTop: '24px' }}>
           <h2>Recommendation:</h2>
