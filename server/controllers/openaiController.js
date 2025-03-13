@@ -67,7 +67,7 @@ export const queryOpenAIChat = async (_req, res, next) => {
   const instructGoal = `When given a user's query and a list of ingredients, recommend a single recipe to the user and include a brief description with simple but clear steps to execute the recipe.`;
   const instructFormat = `
   Your response should be in the format: 
-  "[Recipe Name] - [Brief description with steps]"`;
+  "[Recipe Name] - [Brief description with steps numbered in a new line]"`;
   const systemMessage = instructRole + instructGoal + instructFormat;
   const userMessage = `
   User request: """I have these ingredients in my fridge: ${userQuery}"""

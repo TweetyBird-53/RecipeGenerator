@@ -8,7 +8,7 @@ import 'dotenv/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pinecone = new Pinecone();
-const index = pinecone.index('recipes-sample');
+const index = pinecone.index('recipes2');
 
 /**
  * Generate Pinecone records from embeddings data.

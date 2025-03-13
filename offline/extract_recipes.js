@@ -2,9 +2,9 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { promises as fs } from 'fs';
 
-const DB_PATH = 'offline/5k-recipes.db'; // Change to the actual path
+const DB_PATH = 'offline/5k-recipes.db';
 
-async function extractRecipes(limit = 100) {
+async function extractRecipes(limit = 5000) {
     const db = await open({
       filename: DB_PATH,
       driver: sqlite3.Database,
