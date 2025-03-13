@@ -59,7 +59,7 @@ export const queryOpenAIChat = async (_req, res, next) => {
   const recipeOptions = pineconeQueryResult
     .map(
       (recipe, i) =>
-        `'''Option ${i}: ${recipe.metadata?.title}: ${recipe.metadata?.plot}'''`
+        `'''Option ${i}: ${recipe.metadata?.title}: ${recipe.metadata?.Instructions}'''`
     )
     .join(', ');
 
@@ -75,7 +75,7 @@ export const queryOpenAIChat = async (_req, res, next) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-4o',
       messages: [
         { role: 'system', content: systemMessage },
         { role: 'user', content: userMessage },
@@ -83,7 +83,9 @@ export const queryOpenAIChat = async (_req, res, next) => {
       temperature: 0.3,
       store: true,
     });
+    
     const { content } = completion.choices[0].message;
+    console.log("content: ", content);
     if (!content) {
       const error = {
         log: 'OpenAI did not return a completion',

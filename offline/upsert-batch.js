@@ -2,24 +2,24 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { promises as fs } from 'fs';
 import OpenAI from 'openai';
-import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
+import { Pinecone } from '@pinecone-database/pinecone';
 import 'dotenv/config';
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pinecone = new Pinecone();
-const index = pinecone.index('movies');
+const index = pinecone.index('recipes-sample');
 
 /**
  * Generate Pinecone records from embeddings data.
  */
 const generatePineconeRecords = (embeddingsData) => {
   const pineconeRecords = [];
-  for (const { movie, embedding } of embeddingsData) {
+  for (const { recipe, embedding } of embeddingsData) {
     pineconeRecords.push({
-      id: movie.id,
+      id: recipe.id,
       values: embedding,
-      metadata: movie,
+      metadata: recipe,
     });
   }
   return pineconeRecords;

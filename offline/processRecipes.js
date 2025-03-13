@@ -30,16 +30,30 @@ async function generateEmbedding(text) {
 async function processRecipes() {
   const recipes = JSON.parse(readFileSync('recipes.json', 'utf8'));
 
+  // Process each recipe and store it inside a "recipe" object
+  const processedRecipes = [];
+
   // Add embeddings to recipes
   for (const recipe of recipes) {
     const text = `Title: ${recipe.title}\nIngredients: ${recipe.Ingredients}\nInstructions: ${recipe.Instructions}`;
     const embedding = await generateEmbedding(text);
-    recipe.embedding = embedding;
+    // recipe.embedding = embedding;
+    processedRecipes.push({
+      recipe: {
+        id: String(recipe.id),
+        title: recipe.title,
+        Ingredients: recipe.Ingredients,
+        Instructions: recipe.Instructions,
+    },
+    embedding: embedding, // Keep the embedding separate
+  });
   }
 
+  
+
   // Save the processed recipes with embeddings
-  writeFileSync('processed_recipes.json', JSON.stringify(recipes, null, 2));
-  console.log('Processed recipes saved to processed_recipes.json');
+  writeFileSync('embeddings_data.json', JSON.stringify(processedRecipes, null, 2));
+  console.log('Processed recipes saved to embeddings_data.json');
 }
 
 // Call the processRecipes function to generate embeddings and save the data

@@ -24,7 +24,7 @@ const Recommendations = () => {
         setError(parsedError.err);
       } else {
         const parsedResponse = await response.json();
-        setRecommendation(parsedResponse.movieRecommendation);
+        setRecommendation(parsedResponse.recipeRecommendation);
       }
     } catch (_err) {
       setError('Error fetching recommendation');

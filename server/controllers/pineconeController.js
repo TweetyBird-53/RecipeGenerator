@@ -9,7 +9,7 @@ const pc = new Pinecone({
   // environment: process.env.PINECONE_HOST_URL,
 });
 
-const Index = pc.index('recipes');
+const Index = pc.index('recipes-sample');
 
 export const queryPineconeDatabase = async (_req, res, next) => {
   const { embedding } = res.locals;
@@ -36,6 +36,7 @@ export const queryPineconeDatabase = async (_req, res, next) => {
     res.locals.pineconeQueryResult = databaseQueryResult.matches;
     return next();
   } catch (err) {
+    console.log(`queryPineconeDatabase: ${err}`);
     return next({
       log: 'queryPineconeDatabase: Error: Database query failed',
       message: { err: 'An error occurred while querying database' },
