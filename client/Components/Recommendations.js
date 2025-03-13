@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import tweetychef from '../public/tweety-chef.png';
 
 const Recommendations = () => {
   const [userQuery, setUserQuery] = useState('');
@@ -35,19 +36,20 @@ const Recommendations = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <img src='https://i.imgur.com/BHvAMch.png' style={{ width: '220px' }} />
       <form onSubmit={handleSubmit}>
         <label>
-          I have these ingredients in my fridge:
+          <div>I have these ingredients in my fridge:</div>
           <input
             type='text'
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
             placeholder='Enter names of ingredients separated by commas'
-            style={{ width: '100%', padding: '8px', marginTop: '8px' }}
+            style={{ width: '50%', padding: '8px', marginTop: '8px' }}
           />
         </label>
         <button type='submit' style={{ marginTop: '16px' }} disabled={loading}>
-          {loading ? 'Loading...' : 'Get Recommendation'}
+          {loading ? 'Loading...' : 'Get Me a Recommendation!'}
         </button>
       </form>
       {error && <p className='error'>{error}</p>}
