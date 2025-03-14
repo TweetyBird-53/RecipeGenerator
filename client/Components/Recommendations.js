@@ -56,7 +56,7 @@ const Recommendations = () => {
             type='text'
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
-            placeholder='onion, tomato, garlic...'
+            placeholder='ex. onion, tomato, garlic...'
             style={{ width: '100%', padding: '15px', marginTop: '10px', textAlign: 'center'}}
           />
         </label>

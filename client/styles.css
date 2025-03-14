@@ -70,8 +70,8 @@ textarea {
   outline: none;
 }
 
-textarea::placeholder {
-  color: #707b94;
+input::placeholder {
+  color: #b7babf;
 }
 
 button {
