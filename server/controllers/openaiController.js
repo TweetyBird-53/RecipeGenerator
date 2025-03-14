@@ -65,9 +65,14 @@ export const queryOpenAIChat = async (_req, res, next) => {
 
   const instructRole = `You are a helpful assistant that recommends a recipe to users based on their ingredients.`;
   const instructGoal = `When given a user's query and a list of ingredients, recommend a single recipe to the user and include a brief description with simple but clear steps to execute the recipe.`;
-  const instructFormat = `
-  Your response should be in the format: 
-  "[Recipe Name] - [Brief description with steps numbered in a new line]"`;
+  const instructFormat = `Your response should be an object consisting of three separate properties. Do not include any additional characters like \' or \`.
+  Section 1: 
+  {
+  "title": "[Recipe Name]",
+  "ingredients": "[array of Ingredients]",
+  "instructions": "[array of numbered instructions 1. [first step ] 2. [second step] 3. [third step] etc...]"
+  }
+  `;
   const systemMessage = instructRole + instructGoal + instructFormat;
   const userMessage = `
   User request: """I have these ingredients in my fridge: ${userQuery}"""
@@ -85,7 +90,9 @@ export const queryOpenAIChat = async (_req, res, next) => {
     });
     
     const { content } = completion.choices[0].message;
+    console.log('RECIPE ', JSON.parse(completion.choices[0].message.content));
     console.log("content: ", content);
+    const recipeInfo = JSON.parse(completion.choices[0].message.content)
     if (!content) {
       const error = {
         log: 'OpenAI did not return a completion',
@@ -94,10 +101,12 @@ export const queryOpenAIChat = async (_req, res, next) => {
       };
       return next(error);
     }
-    res.locals.allRecipeRecommentations = completion.choices.map(
-      (choice) => choice.message.content || ''
-    );
-    res.locals.recipeRecommendation = content;
+    // res.locals.allRecipeRecommentations = completion.choices.map(
+    //   (choice) => choice.message.content || ''
+    // );
+
+    res.locals.recipeRecommendation = recipeInfo;
+    // res.locals.recipeRecommendation = content;
     return next();
   } catch (err) {
     const error = {

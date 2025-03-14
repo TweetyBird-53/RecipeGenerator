@@ -12,8 +12,31 @@ body {
   background-color: #f9ce7e;
   color: #8c461b;
   line-height: 1.6;
-  padding: 20px;
   min-height: 100vh;
+  max-width: 600px;
+  min-width: 600px;
+  margin: 0 auto;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fbe0ae;
+  background-color: ;
+  padding: 40px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.bottomSection{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 40px 40px 40px;
+  background-color: #fcedd1;
+  border-radius: 3px;
+
 }
 
 /* Container Styles */
@@ -113,6 +136,20 @@ table {
   border: 1px solid #1f2c3e;
   border-radius: 5px;
   overflow: hidden;
+}
+
+/* style recipe result */
+.recipeDetails{
+  text-align: left;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+/* style instructions section */
+h3 .instructions{
+  align-self: flex-start;
 }
 
 th,
