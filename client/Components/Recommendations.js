@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 const Recommendations = () => {
   const [userQuery, setUserQuery] = useState('');
   const [recommendation, setRecommendation] = useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const [instructions, setInstructions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -25,7 +27,9 @@ const Recommendations = () => {
         setError(parsedError.err);
       } else {
         const parsedResponse = await response.json();
-        setRecommendation(parsedResponse.recipeRecommendation);
+        setRecommendation(parsedResponse.recipeRecommendation.title);
+        setIngredients(parsedResponse.recipeRecommendation.ingredients);
+        setInstructions(parsedResponse.recipeRecommendation.instructions);
       }
     } catch (_err) {
       setError('Error fetching recommendation');
@@ -34,31 +38,49 @@ const Recommendations = () => {
     }
   };
 
+ const separateIngredients = ingredients.map(ingredient => <p>{ingredient}</p>);
+
+ const separateInstructions = instructions.map(instruction => <p>{instruction}</p>);
+  
+
+
   return (
-    <div style={{ padding: '20px' }}>
-      <img src='https://i.imgur.com/BHvAMch.png' style={{ width: '220px' }} />
+    <div style={{ padding: '20px' }} className='allContent'>
+      <div className='topSection'>
+        <h1>Let's find a recipe to cook!</h1>
+      <img src='https://i.imgur.com/BHvAMch.png' style={{ width: '400px', marginBottom: '40px'}} />
       <form onSubmit={handleSubmit}>
         <label>
-          <div>I have these ingredients in my fridge:</div>
+          <h3>I have these ingredients:</h3>
           <input
             type='text'
             value={userQuery}
             onChange={(e) => setUserQuery(e.target.value)}
-            placeholder='Enter names of ingredients separated by commas'
-            style={{ width: '50%', padding: '8px', marginTop: '8px' }}
+            placeholder='onion, tomato, garlic...'
+            style={{ width: '100%', padding: '15px', marginTop: '10px', textAlign: 'center'}}
           />
         </label>
-        <button type='submit' style={{ marginTop: '16px' }} disabled={loading}>
-          {loading ? 'Loading...' : 'Get Me a Recommendation!'}
+        <button type='submit' style={{ marginTop: '0px' }} disabled={loading}>
+          {loading ? 'Loading...' : 'Get Recommendation!'}
         </button>
+        {error && <p className='error'>{error}</p>}
       </form>
-      {error && <p className='error'>{error}</p>}
+      </div>    
       {recommendation && (
-        <div style={{ marginTop: '24px' }}>
-          <h2>Recommendation:</h2>
-          <p>{recommendation}</p>
+        <div className='bottomSection'>  
+        <div style={{ marginTop: '0px' }} className='recipeDetails' >
+          
+          <br/>
+          <h2>{recommendation}</h2>
+          <br/>
+          <h3>Ingredients:</h3>
+          <div>{separateIngredients}</div>
+          <br/>
+          <h3 className='Instructions'>Instructions:</h3>
+          <div>{separateInstructions}</div>
         </div>
-      )}
+        </div>
+      )} 
     </div>
   );
 };
